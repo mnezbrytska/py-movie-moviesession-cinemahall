@@ -34,15 +34,18 @@ def update_movie_session(
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
 ) -> Optional[MovieSession]:
-    if not any([show_time, movie_id, cinema_hall_id]):
+    update_session = {}
+    if show_time:
+        update_session["show_time"] = show_time
+    if movie_id:
+        update_session["movie_id"] = movie_id
+    if cinema_hall_id:
+        update_session["cinema_hall_id"] = cinema_hall_id
+    if not update_session:
         return None
     movie_session = MovieSession.objects.get(id=session_id)
-    if show_time:
-        movie_session.show_time = show_time
-    if movie_id:
-        movie_session.movie = Movie.objects.get(id=movie_id)
-    if cinema_hall_id:
-        movie_session.cinema_hall = CinemaHall.objects.get(id=cinema_hall_id)
+    for key, value in update_session.items():
+        setattr(movie_session, key, value)
     movie_session.save()
     return movie_session
 
