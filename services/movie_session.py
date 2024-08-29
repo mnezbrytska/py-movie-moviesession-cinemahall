@@ -9,7 +9,7 @@ def create_movie_session(
         movie_show_time: str,
         cinema_hall_id: int,
         movie_id: int,
-) -> MovieSession:
+) -> None:
     MovieSession.objects.create(
         show_time=movie_show_time,
         cinema_hall_id=cinema_hall_id,
@@ -33,7 +33,7 @@ def update_movie_session(
         show_time: Optional[str] = None,
         movie_id: Optional[int] = None,
         cinema_hall_id: Optional[int] = None
-) -> Optional[MovieSession]:
+) -> None:
     update_session = {}
     if show_time:
         update_session["show_time"] = show_time
