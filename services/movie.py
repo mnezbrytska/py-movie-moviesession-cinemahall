@@ -35,4 +35,3 @@ def create_movie(
         new_film.genres.set(genres_ids)
     if actors_ids:
         new_film.actors.set(actors_ids)
-    return new_film
